@@ -27,7 +27,13 @@ class ProductRepository implements ProductRepositoryInterface
     }
 
     public function update(array $data,$id){
-       return Product::whereId($id)->update($data);
+      $product = Product::findOrFail($id);
+
+      // Update the product with the new data
+      $product->update($data);
+  
+      // Return the updated product instance
+      return $product;
     }
     
     public function delete($id){

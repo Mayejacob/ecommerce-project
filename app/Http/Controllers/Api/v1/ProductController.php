@@ -117,9 +117,9 @@ class ProductController extends BaseController
     public function show($id)
     {
         $product = $this->productRepositoryInterface->getById($id);
-        $product = ProductResource::collection($product);
+        $productResource = new ProductResource($product);
 
-        return $this->sendResponse($product, 'product fetched successfully');
+        return $this->sendResponse($productResource, 'product fetched successfully');
     }
     /**
      * @OA\Put(
@@ -161,7 +161,7 @@ class ProductController extends BaseController
         try{
              $product = $this->productRepositoryInterface->update($updateDetails,$id);
 
-             $product = ProductResource::collection($product);
+             $productResource = new ProductResource($product);
 
              return $this->sendResponse($product, 'product updated successfully');
 
